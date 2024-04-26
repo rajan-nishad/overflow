@@ -14,7 +14,7 @@ import { assignBadges } from "@/lib/utils";
 
 import type {
   CreateUserParams,
-  DeleteUserParams,
+  // DeleteUserParams,
   GetAllUsersParams,
   GetSavedQuestionParams,
   GetUserByIdParams,
@@ -54,37 +54,37 @@ export async function updateUser(params: UpdateUserParams) {
   }
 }
 
-export async function deleteUser(params: DeleteUserParams) {
-  try {
-    connectToDatabase();
+// export async function deleteUser(params: DeleteUserParams) {
+//   try {
+//     connectToDatabase();
 
-    const { clerkId } = params;
+//     const { clerkId } = params;
 
-    const user = await User.findOneAndDelete({ clerkId });
+//     const user = await User.findOneAndDelete({ clerkId });
 
-    if (!user) {
-      throw new Error("User not found");
-    }
+//     if (!user) {
+//       throw new Error("User not found");
+//     }
 
-    // get user question ids
+//     // get user question ids
 
-    // const userQuestionIds = await Question.find({ author: user._id }).distinct(
-    //   "_id"
-    // );
+//     // const userQuestionIds = await Question.find({ author: user._id }).distinct(
+//     //   "_id"
+//     // );
 
-    // delete user questions
-    await Question.deleteMany({ author: user._id });
+//     // delete user questions
+//     await Question.deleteMany({ author: user._id });
 
-    // TODO: Delete user answers, comments, etc
+//     // TODO: Delete user answers, comments, etc
 
-    const deletedUser = await User.findByIdAndDelete(user._id);
+//     const deletedUser = await User.findByIdAndDelete(user._id);
 
-    return deletedUser;
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
+//     return deletedUser;
+//   } catch (error) {
+//     console.log(error);
+//     throw error;
+//   }
+// }
 
 export async function getUserById(params: { userId: string }) {
   try {
